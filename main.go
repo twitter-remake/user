@@ -8,10 +8,10 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/rs/zerolog/pkgerrors"
-	"github.com/twitter-remake/auth/config"
 	"github.com/twitter-remake/user/api"
 	"github.com/twitter-remake/user/backend"
 	"github.com/twitter-remake/user/clients"
+	"github.com/twitter-remake/user/config"
 	"github.com/twitter-remake/user/repository"
 )
 

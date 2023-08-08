@@ -1,8 +1,6 @@
-package repository
+package model
 
 import (
-	"errors"
-	"net/mail"
 	"time"
 
 	userpb "github.com/twitter-remake/user/proto/gen/go/user"
@@ -27,6 +25,8 @@ type User struct {
 	UpdatedAt        time.Time `json:"updated_at"`
 }
 
+// PB returns a userpb.User representation of the user.
+// This is used to send the user through gRPC
 func (u User) PB() *userpb.User {
 	return &userpb.User{
 		Id:               u.ID,
@@ -44,21 +44,4 @@ func (u User) PB() *userpb.User {
 		CreatedAt:        timestamppb.New(u.CreatedAt),
 		UpdatedAt:        timestamppb.New(u.UpdatedAt),
 	}
-}
-
-// Validate validates the user fields
-func (u User) Validate() error {
-	if u.ScreenName == "" {
-		return errors.New("missing User.ScreenName")
-	}
-
-	if u.Email == "" {
-		return errors.New("missing User.Email")
-	}
-
-	if _, err := mail.ParseAddress(u.Email); err != nil {
-		return errors.New("invalid email address")
-	}
-
-	return nil
 }
